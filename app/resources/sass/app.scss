@@ -56,3 +56,15 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
     font-weight: bold;
 }
 
+.profile_picture {
+    width:  100px;       
+    height: 100px;       
+    object-fit:cover;
+	border-radius:50%;
+	object-position:-20px 0px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+  }

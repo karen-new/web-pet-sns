@@ -6,10 +6,10 @@
         <h2 class="my-5 text-center header-green">投稿一覧</h2>
 
         <div class="row">
-            @forelse($pets as $pet)
-                @include('layouts.post',['pet' => $pet, 'pet_user' => $pet->user, 'user' => $user])
+            @forelse($posts as $post)
+                @include('layouts.post',['post' => $post, 'post_user' => $post->user, 'user' => $user])
             @empty
-                <td>No posts!!</td>
+                <div class="text-center">まだ投稿がありません</div>
             @endforelse
         </div>
     </div>

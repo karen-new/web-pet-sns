@@ -9,7 +9,7 @@
                 {{-- バリデーションエラー部分テンプレート --}}
                 @include('layouts.errors')
                 
-                {{ Form::open(['url' => route('pet.store'),'enctype'=>'multipart/form-data']) }}
+                {{ Form::open(['url' => route('post.store'),'enctype'=>'multipart/form-data']) }}
 
                 <div class="my-3">
                     {{ Form::file('picture')}}

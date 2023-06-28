@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use \InterventionImage;
 
-class MypageController extends Controller
+class ProfileController extends Controller
 {
     public function __construct()
     {
@@ -23,8 +23,8 @@ class MypageController extends Controller
     public function index($id)
     {
         $user = User::find($id);
-        $pets = PetsnsItem::where('user_id', $id)->orderBy('created_at', 'desc')->get();
-        return view('mypage.index', compact('pets'), ['user' => $user]);
+        $posts = PetsnsItem::where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        return view('profile.index', compact('posts'), ['user' => $user]);
     }
 
     /**
@@ -33,7 +33,7 @@ class MypageController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
-        return view('mypage.profile_edit', compact('user'));
+        return view('profile.edit', compact('user'));
     }
 
     /**
@@ -42,9 +42,9 @@ class MypageController extends Controller
     public function update($id, Request $request)
     {
         $request->validate([            
-            // 'picture' => 'required|max:10240|mimes:jpeg,gif,png,jpg',
+            'picture' => 'max:1024|mimes:jpeg,gif,png,jpg',
             'name' => 'required|max:20',
-            'introduction' => 'required|max:100',
+            'introduction' => 'max:100',
         ]);
         $user = Auth::user();
         $user->name = $request->name;
@@ -59,7 +59,7 @@ class MypageController extends Controller
 
         $user->save();
 
-        return redirect()->route('mypage.index', $user->id);
+        return redirect()->route('profile.index', $user->id);
     }
 
     public function follow($id)

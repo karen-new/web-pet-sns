@@ -9,10 +9,10 @@
                 {{-- バリデーションエラー部分テンプレート --}}
                 @include('layouts.errors')
 
-                {{ Form::open(['url' => route('pet.update', $pet->id), 'method' => 'put']) }}
+                {{ Form::open(['url' => route('post.update', $post->id), 'method' => 'put']) }}
 
                 <div class="my-3">
-                    {{ Form::textarea('comment', $pet->comment, ['class' => 'form-control', 'placeholder' => '面白い犬']) }}
+                    {{ Form::textarea('comment', $post->comment, ['class' => 'form-control', 'placeholder' => '面白い犬']) }}
                 </div>
 
                 <div>

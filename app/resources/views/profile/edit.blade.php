@@ -6,16 +6,12 @@
             <div class="pt-2">
                 <p class="h3 border-bottom border-secondary pb-3">プロフィール編集</p>
             </div>
-            {{ Form::open(['url' => route('mypage.update', $user->id),  'method' => 'put', 'enctype' => 'multipart/form-data']) }}
+            {{ Form::open(['url' => route('profile.update', $user->id),  'method' => 'put', 'enctype' => 'multipart/form-data']) }}
             @csrf
             {{ Form::hidden('id',$user->id) }}
             <div class="m-3">
                 <div>
-                @if ($user->image !=='')
                     <img src="{{ \Storage::url($user->picture) }}" width="25%">
-                @else
-                    <img src="{{ \Storage::url('storage/user_default.img') }}">
-                @endif
                 </div>
                 <div>
                     <input type="file" name="image">

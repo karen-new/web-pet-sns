@@ -11,10 +11,10 @@
 
     @forelse ($posts as $post)
     <tr>
-        @include('layouts.post',['pet' => $post, 'pet_user' => $post->user, 'user' => $user])
+        @include('layouts.post',['post' => $post, 'post_user' => $post->user, 'user' => $user])
     </tr>
     @empty
-        <td>No Post</td>
+        <td>{{ $keyword }} に一致する結果はありません</td>
     @endforelse
 
 @endsection

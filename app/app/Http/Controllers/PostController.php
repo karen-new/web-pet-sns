@@ -11,7 +11,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Log;
 
 
-class PetsnsController extends Controller
+class PostController extends Controller
 {
     public function __construct()
     {
@@ -27,9 +27,9 @@ class PetsnsController extends Controller
         $user = Auth::user();
         $follows = $user->follows()->pluck('id')->toArray();
         array_push($follows,$user->id);
-        $pets = PetsnsItem::whereIn('user_id', $follows)->orderBy('created_at', 'desc')->get();
+        $posts = PetsnsItem::whereIn('user_id', $follows)->orderBy('created_at', 'desc')->get();
 
-        return view('pet.index', compact('pets'), ['user' => $user]);
+        return view('post.index', compact('posts'), ['user' => $user]);
 
     }
 
@@ -40,7 +40,7 @@ class PetsnsController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('pet.create', ['user' => $user]);
+        return view('post.create', ['user' => $user]);
     }
 
     /**
@@ -63,7 +63,7 @@ class PetsnsController extends Controller
                 'comment' => $request->comment,
             ]
         );
-        return redirect()->route('pet.index');
+        return redirect()->route('post.index');
     }
 
 
@@ -72,13 +72,13 @@ class PetsnsController extends Controller
      */
     public function show($id)
     {
-        $pet = PetItem::find($id);
-        $count_like_users = $pet->like_users()->count();
+        $post = PetItem::find($id);
+        $count_like_users = $post->like_users()->count();
         $data=[
                'count_like_users'=>$count_like_users,
               ];
         
-        return view('pet.show', compact('pet'), ['count' => $data]);
+        return view('post.show', compact('post'), ['count' => $data]);
     }
 
     /**
@@ -86,9 +86,9 @@ class PetsnsController extends Controller
      */
     public function edit($id)
     {
-        $pet = PetsnsItem::find($id);
+        $post = PetsnsItem::find($id);
 
-        return view('pet.edit', compact('pet'));
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -100,11 +100,11 @@ class PetsnsController extends Controller
             'comment' => 'required|max:200',
         ]);
 
-        $pet = PetsnsItem::find($id);
-        $pet->comment = $request->comment;
-        $pet->save();
+        $post = PetsnsItem::find($id);
+        $post->comment = $request->comment;
+        $post->save();
 
-        return redirect()->route('pet.index');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -112,15 +112,15 @@ class PetsnsController extends Controller
      */
     public function destroy($id)
     {
-        $pet = PetsnsItem::find($id);
-        if ($pet != null){
-            $pet->delete();
-            if (Storage::exists('public/img/'.$pet->path)) {
-                Storage::delete('public/img/'.$pet->path);
+        $post = PetsnsItem::find($id);
+        if ($post != null){
+            $post->delete();
+            if (Storage::exists('public/img/'.$post->path)) {
+                Storage::delete('public/img/'.$post->path);
             }
         }
 
-        return redirect()->route('pet.index');
+        return redirect()->route('post.index');
     }
 
 }

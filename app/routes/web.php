@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\PetsnsController::class, 'index'])->middleware('auth');;
+Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->middleware('auth');;
 
 Auth::routes();
 
@@ -23,12 +23,12 @@ Route::delete('/unlike/{id}',[App\Http\Controllers\LikeController::class,'destro
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
 Route::post('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
 Route::post('/search', [App\Http\Controllers\SearchController::class, 'show'])->name('search.show');
-Route::get('/mypage/index/{id}',[App\Http\Controllers\MypageController::class, 'index'])->name('mypage.index');
-Route::get('/mypage/edit/{id}',[App\Http\Controllers\MypageController::class, 'edit'])->name('mypage.edit');
-Route::post('/mypage/edit/{id}',[App\Http\Controllers\MypageController::class, 'edit'])->name('mypage.edit');
-Route::put('/mypage/update/{id}',[App\Http\Controllers\MypageController::class, 'update'])->name('mypage.update');
-Route::post('/mypage/follow/{id}',[App\Http\Controllers\MypageController::class, 'follow'])->name('mypage.follow');
-Route::get('/mypage/follow/{id}',[App\Http\Controllers\MypageController::class, 'follow'])->name('mypage.follow');
-Route::post('/mypage/unfollow/{id}',[App\Http\Controllers\MypageController::class, 'unfollow'])->name('mypage.unfollow');
-Route::get('/mypage/unfollow/{id}',[App\Http\Controllers\MypageController::class, 'unfollow'])->name('mypage.unfollow');
-Route::resource('pet', 'App\Http\Controllers\PetsnsController');
+Route::get('/profile/index/{id}',[App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+Route::get('/profile/edit/{id}',[App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile/edit/{id}',[App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/update/{id}',[App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+Route::post('/profile/follow/{id}',[App\Http\Controllers\ProfileController::class, 'follow'])->name('profile.follow');
+Route::get('/profile/follow/{id}',[App\Http\Controllers\ProfileController::class, 'follow'])->name('profile.follow');
+Route::post('/profile/unfollow/{id}',[App\Http\Controllers\ProfileController::class, 'unfollow'])->name('profile.unfollow');
+Route::get('/profile/unfollow/{id}',[App\Http\Controllers\ProfileController::class, 'unfollow'])->name('profile.unfollow');
+Route::resource('post', 'App\Http\Controllers\PostController');

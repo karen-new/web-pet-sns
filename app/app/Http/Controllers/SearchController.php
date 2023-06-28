@@ -13,7 +13,7 @@ class SearchController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
         /**
      * 投稿の検索
      */
@@ -21,16 +21,16 @@ class SearchController extends Controller
     {
         $user = Auth::user();
         $keyword = $request->input('keyword');
-        $pets = PetsnsItem::query();
+        $posts = PetsnsItem::query();
 
         if(!empty($keyword)) {
-            $pets->where('comment', 'LIKE', "%{$keyword}%")
+            $posts->where('comment', 'LIKE', "%{$keyword}%")
             ->orwhereHas('user', function ($query) use ($keyword) {
                 $query->where('name', 'LIKE', "%{$keyword}%");
             });
         }
 
-        $posts = $pets->get();
+        $posts = $posts->get();
 
         return view('search.index', compact('posts', 'keyword'), ['user' => $user]);
     }
@@ -38,8 +38,8 @@ class SearchController extends Controller
     public function show()
     {
         $user = Auth::user();
-        $pets = PetsnsItem::query()->orderBy('created_at', 'desc')->get();
+        $posts = PetsnsItem::query()->orderBy('created_at', 'desc')->get();
 
-        return view('search.index', compact('pets'), ['user' => $user]);
+        return view('search.index', compact('posts'), ['user' => $user]);
     }
 }

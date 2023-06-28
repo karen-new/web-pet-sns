@@ -1,40 +1,41 @@
-<div class="mx-auto">
-    <div class="card mb-3">
-        <div class="card-header d-flex justify-content-between">
-            <a href="{{ route('mypage.index', $pet->user_id) }}" class="mt-3">
-                {{ $pet_user->name }}
+<div class="col-10 mx-auto">
+    <div class="mb-3">
+        <div class="d-flex justify-content-between mb-3 mt-5 border-top">
+            <img src="{{ Storage::url($post_user->picture) }}" width="50" height="40">
+            <a href="{{ route('profile.index', $post->user_id) }}" class="mt-3 fw-bold">
+                {{ $post_user->name }}
             </a>
             <small>
-                {{ \Carbon\Carbon::parse($pet->created_at)->timezone('Asia/Tokyo')->format('Y/m/d H:i:s') }}
+                {{ \Carbon\Carbon::parse($post->created_at)->timezone('Asia/Tokyo')->format('Y/m/d H:i:s') }}
             </small>
         </div>
-        <div class="card-body">
-            <img src="{{ Storage::url($pet->path) }}" width="800" height="400">
-            {{ $pet->comment }}
+        <div class="text-center">
+            <img src="{{ Storage::url($post->path) }}" width="800" height="400">
+            {{ $post->comment }}
         </div>
-        <div class="card-footer ">
+        <div>
             <div class="text-left">
-            @if (Auth::user()->is_like($pet->id))
-                {{ Form::open(['route' => ['likes.unlike', $pet->id], 'method' => 'delete']) }}
+            @if (Auth::user()->is_like($post->id))
+                {{ Form::open(['route' => ['likes.unlike', $post->id], 'method' => 'delete']) }}
                     {{ Form::button('<i class="fa fa-heart" style="font-size:36px;color:red"></i>', ['class' => "button btn btn-none", 'type' => 'submit']) }}
                     
                 {{ Form::close() }}
             @else
-                {{ Form::open(['route' => ['likes.like', $pet->id]]) }}
+                {{ Form::open(['route' => ['likes.like', $post->id]]) }}
                     {{ Form::button('<i class="fa-regular fa-heart" style="font-size:36px;color:red"></i>', ['class' => "button btn btn-none", 'type' => 'submit']) }}
                     
                 {{ Form::close() }}
             @endif
             </div>
-            @if($pet->user_id == $user->id)
+            @if($post->user_id == $user->id)
                 <div class="d-flex justify-content-end">
                     {{-- Edit Button --}}
-                    <a href="{{ route('pet.edit', $pet->id) }}" class="btn btn-orange mt-3">
+                    <a href="{{ route('post.edit', $post->id) }}" class="btn btn-orange mt-3">
                         <i class="fa-solid fa-pen pe-2"></i>
                         編集
                     </a>
                     {{-- destroy Button --}}
-                    {{ Form::open(['url' => route('pet.destroy', $pet->id), 'class' => 'mt-3', 'method' => 'delete']) }}
+                    {{ Form::open(['url' => route('post.destroy', $post->id), 'class' => 'mt-3', 'method' => 'delete']) }}
                         {{ Form::submit('削除', ['class' => 'btn btn-blue px-4']) }}
                     {{ Form::close() }}
                 </div>

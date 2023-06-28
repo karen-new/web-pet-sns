@@ -10,7 +10,7 @@
 
     @forelse ($posts as $post)
     <tr>
-        @include('layouts.post',['pet' => $post, 'user' => $user]);
+        @include('layouts.post',['post' => $post, 'user' => $user]);
     </tr>
     @empty
         <td>No posts!!</td>

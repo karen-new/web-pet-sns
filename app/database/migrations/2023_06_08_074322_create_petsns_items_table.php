@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('petsns_items', function (Blueprint $table) {
+        Schema::create('postsns_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained()
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('petsns_items');
+        Schema::dropIfExists('postsns_items');
     }
 };
