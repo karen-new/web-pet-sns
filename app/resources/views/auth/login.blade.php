@@ -4,10 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+            <div class="login">
+                <div class="mb-5">
+                <div class="login-header">{{ __('PetSNS') }}</div>
+                </div>
 
-                <div class="card-body">
+                <div class="login-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -59,13 +61,19 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('パスワードを忘れた方はこちら') }}
                                     </a>
                                 @endif
                             </div>
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="col-md-12 text-center">
+                {{ __('アカウントをお持ちでないですか？') }}
+                <a class="btn btn-link" href="{{ route('register') }}">
+                    {{__('新規登録')}}
+                </a>
             </div>
         </div>
     </div>

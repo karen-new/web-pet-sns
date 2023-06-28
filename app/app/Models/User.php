@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'picture',
         'email',
         'password',
+        'introduction'
     ];
 
     /**
@@ -42,4 +44,53 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Relationships
+     */
+    public function posts() {
+      return $this->hasMany('App\Models\PetsnsItem');
+  }
+
+
+    public function follows()
+    {
+        return $this->belongsToMany(User::class, 'follower_user', 'follower_id', 'user_id');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id');
+    }
+
+
+    public function likes()
+    {
+        return $this->belongsToMany('App\Models\PetsnsItem','likes','user_id','post_id')->withTimestamps();
+    }
+
+    //いいねしているかどうか判別する
+    public function is_like($id)
+    {
+      return $this->likes()->where('post_id',$id)->exists();
+    }
+
+    //いいねする
+    public function like($id)
+    {
+      if($this->is_like($id)){
+      } else {
+        $this->likes()->attach($id);
+      }
+    }
+
+    //いいねを解除する
+    public function unlike($id)
+    {
+      if($this->is_like($id)){
+        $this->likes()->detach($id);
+      } else {
+      }
+    }
+
 }
