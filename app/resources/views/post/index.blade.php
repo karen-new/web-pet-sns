@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h2 class="my-5 text-center header-green">投稿一覧</h2>
+        <h2 class="my-5 text-center header-green">フォロー中投稿一覧</h2>
 
         <div class="row">
             @forelse($posts as $post)
