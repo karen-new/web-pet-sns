@@ -4,7 +4,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./app:/var/www/html
+      - ./app:/app/public
   postgres:
     image: postgres:14.7-alpine3.17
     environment:
