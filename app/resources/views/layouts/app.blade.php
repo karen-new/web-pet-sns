@@ -78,9 +78,6 @@
         <main class="py-4">
             @yield('content')
         </main>
-        @auth
-            @include('layouts.footer')
-        @endauth
     </div>
 </body>
 </html>
