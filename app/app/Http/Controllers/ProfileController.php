@@ -31,7 +31,7 @@ class ProfileController extends Controller
     /**
      * プロフィールの編集
      */
-    public function edit($id)
+    public function edit()
     {
         $user = Auth::user();
         return view('profile.edit', compact('user'));
@@ -40,7 +40,7 @@ class ProfileController extends Controller
     /**
      * プロフィールの更新
      */
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
         $request->validate([
             'picture' => 'max:1024|mimes:jpeg,gif,png,jpg',

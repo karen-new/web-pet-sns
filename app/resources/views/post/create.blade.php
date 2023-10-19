@@ -8,18 +8,19 @@
             <div class="col-12 col-md-8 mx-auto">
                 {{-- バリデーションエラー部分テンプレート --}}
                 @include('layouts.errors')
-                
-                {{ Form::open(['url' => route('post.store'),'enctype'=>'multipart/form-data']) }}
 
-                <div class="my-3">
-                    {{ Form::file('picture')}}
-                    {{ Form::textarea('comment', '', ['class' => 'form-control form-control-lg', 'placeholder' => '例）かわいい猫ちゃん']) }}
-                </div>
+                <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
 
-                <div class="text-center">
-                    {{ Form::submit('投稿する', ['class' => 'btn btn-green px-4']) }}
-                </div>
-                {{ Form::close() }}
+                    <div class="my-3">
+                        <input type="file" name="picture">
+                        <textarea name="comment" class="form-control form-control-lg" placeholder="例）かわいい猫ちゃん"></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-green px-4">投稿する</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

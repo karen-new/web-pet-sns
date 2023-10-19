@@ -9,16 +9,18 @@
                 {{-- バリデーションエラー部分テンプレート --}}
                 @include('layouts.errors')
 
-                {{ Form::open(['url' => route('post.update', $post->id), 'method' => 'put']) }}
+                <form action="{{ route('post.update', $post->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-                <div class="my-3">
-                    {{ Form::textarea('comment', $post->comment, ['class' => 'form-control', 'placeholder' => '面白い犬']) }}
-                </div>
+                    <div class="my-3">
+                        <textarea name="comment" class="form-control" placeholder="面白い犬">{{ $post->comment }}</textarea>
+                    </div>
 
-                <div>
-                    {{ Form::submit('更新する', ['class' => 'btn btn-green px-4']) }}
-                </div>
-                {{ Form::close() }}
+                    <div>
+                        <button type="submit" class="btn btn-green px-4">更新する</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
