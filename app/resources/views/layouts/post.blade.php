@@ -16,30 +16,31 @@
         <div>
             <div class="text-left">
             @if (Auth::user()->is_like($post->id))
-                {{ Form::open(['route' => ['likes.unlike', $post->id], 'method' => 'delete']) }}
-                    {{ Form::button('<i class="fa fa-heart" style="font-size:36px;color:red"></i>', ['class' => "button btn btn-none", 'type' => 'submit']) }}
-                    
-                {{ Form::close() }}
+                <form action="{{ route('likes.unlike', $post->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="button btn btn-none"><i class="fa fa-heart" style="font-size:36px;color:red"></i></button>
+                </form>
             @else
-                {{ Form::open(['route' => ['likes.like', $post->id]]) }}
-                    {{ Form::button('<i class="fa-regular fa-heart" style="font-size:36px;color:red"></i>', ['class' => "button btn btn-none", 'type' => 'submit']) }}
-                    
-                {{ Form::close() }}
+                <form action="{{ route('likes.like', $post->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="button btn btn-none"><i class="fa-regular fa-heart" style="font-size:36px;color:red"></i></button>
+                </form>
             @endif
             </div>
-            @if($post->user_id == $user->id)
+            @if($post->user_id == Auth::user()->user_id)
                 <div class="d-flex justify-content-end">
-                    {{-- Edit Button --}}
                     <a href="{{ route('post.edit', $post->id) }}" class="btn btn-orange mt-3">
                         <i class="fa-solid fa-pen pe-2"></i>
                         編集
                     </a>
-                    {{-- destroy Button --}}
-                    {{ Form::open(['url' => route('post.destroy', $post->id), 'class' => 'mt-3', 'method' => 'delete']) }}
-                        {{ Form::submit('削除', ['class' => 'btn btn-blue px-4']) }}
-                    {{ Form::close() }}
+                    <form action="{{ route('post.destroy', $post->id) }}" method="POST" class="mt-3">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-blue px-4">削除</button>
+                    </form>
                 </div>
             @endif
-        </div>                        
+        </div>
     </div>
 </div>
