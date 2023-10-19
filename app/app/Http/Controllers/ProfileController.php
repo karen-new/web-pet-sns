@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use \InterventionImage;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -41,7 +42,7 @@ class ProfileController extends Controller
      */
     public function update($id, Request $request)
     {
-        $request->validate([            
+        $request->validate([
             'picture' => 'max:1024|mimes:jpeg,gif,png,jpg',
             'name' => 'required|max:20',
             'introduction' => 'max:100',
@@ -62,6 +63,63 @@ class ProfileController extends Controller
         return redirect()->route('profile.index', $user->id);
     }
 
+    /**
+     * ユーザーの削除
+     */
+    public function destroy()
+{
+    $user = Auth::user();
+    $user->delete();
+
+    return redirect()->route('home')->with('success', 'アカウントが削除されました。');
+}
+
+    /**
+     * プロフィールの個人情報編集
+     */
+    public function personalEdit()
+    {
+        $user = Auth::user();
+        return view('profile.personal', compact('user'));
+    }
+
+    /**
+     * emailの更新
+     */
+    public function emailUpdate(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+        $user = Auth::user();
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect()->route('profile.personal')->with('success', 'メールアドレスが変更されました。');
+
+    }
+
+    /**
+     * passwordの更新
+     */
+    public function passwordUpdate(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|confirmed|min:8',
+        ]);
+
+        $user = Auth::user();
+
+        if (Hash::check($request->current_password, $user->password)) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect()->route('profile.personal')->with('success', 'パスワードが変更されました。');
+        } else {
+            return redirect()->route('profile.personal')->with('error', '現在のパスワードが正しくありません。');
+        }
+    }
+
     public function follow($id)
     {
         $user = User::find($id);
@@ -74,7 +132,7 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
         auth()->user()->follows()->detach($user);
-       
+
         return back();
     }
 }
