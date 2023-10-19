@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Log;
 
 
 class PostController extends Controller
@@ -72,12 +71,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = PetItem::find($id);
+        $post = PetsnsItem::find($id);
         $count_like_users = $post->like_users()->count();
         $data=[
                'count_like_users'=>$count_like_users,
               ];
-        
+
         return view('post.show', compact('post'), ['count' => $data]);
     }
 
@@ -96,7 +95,7 @@ class PostController extends Controller
      */
     public function update($id, Request $request)
     {
-        $request->validate([            
+        $request->validate([
             'comment' => 'required|max:200',
         ]);
 
