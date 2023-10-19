@@ -57,8 +57,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 }
 
 .profile_picture {
-    width:  100px;       
-    height: 100px;       
+    width:  100px;
+    height: 100px;
     object-fit:cover;
 	border-radius:50%;
 	object-position:-20px 0px;
@@ -68,3 +68,15 @@ a {
     color: black;
     text-decoration: none;
   }
+
+  .header {
+    position: fixed; /* ヘッダーを固定位置にする */
+    background-color: #658e7c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    top: 0; /* 上部に固定 */
+    width: 100%; /* 画面幅に合わせる */
+    z-index: 1000; /* 他の要素の上に表示するための z-index 設定 */
+}

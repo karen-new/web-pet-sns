@@ -1,4 +1,4 @@
-<header style="background-color: #658e7c; display: flex; justify-content: space-between; align-items: center; padding: 5px 10px;">
+<header class="header">
     <div>
         <a href="{{ route('post.index') }}" style="color: white; font-size: 36px; font-weight: bold; margin-left: 20px;">
         PetSNS
