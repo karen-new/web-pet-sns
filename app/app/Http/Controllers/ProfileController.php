@@ -19,7 +19,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * 自分のプロフィールと投稿を表示する
+     * プロフィールと投稿を表示する
      */
     public function index($id)
     {
@@ -135,4 +135,5 @@ class ProfileController extends Controller
 
         return back();
     }
+
 }
