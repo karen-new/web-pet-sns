@@ -7,6 +7,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,6 @@ Route::delete('/profile/personal',[ProfileController::class,'destroy'])->name('p
 Route::match(['get', 'post'], '/profile/follow/{id}',[ProfileController::class, 'follow'])->name('profile.follow');
 Route::match(['get', 'post'], '/profile/unfollow/{id}',[ProfileController::class, 'unfollow'])->name('profile.unfollow');
 Route::resource('post', PostController::class);
+//コメント関連
+Route::post('/post/{comment_id}/comments',[CommentsController::class,'store'])->name('comment.create');
+Route::get('/comments/{comment_id}', [CommentsController::class,'destroy'])->name('comment.delete');
