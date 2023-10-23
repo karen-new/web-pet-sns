@@ -68,13 +68,15 @@
                     </form>
                 </div>
             </div>
-            @if($post->user_id == $user->id)
+            @if($post->user_id == Auth::user()->user_id)
                 <div class="d-flex justify-content-end">
+                
                     {{-- 編集ボタン --}}
                     <a href="{{ route('post.edit', $post->id) }}" class="btn btn-orange mt-3">
                         <i class="fa-solid fa-pen pe-2"></i>
                         編集
                     </a>
+                    
                     {{-- 削除ボタン --}}
                     <form action="{{ route('post.destroy', $post->id) }}" method="POST" class="mt-3">
                         @csrf

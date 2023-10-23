@@ -38,6 +38,8 @@ Route::put('/profile/emailUpdate',[ProfileController::class, 'emailUpdate'])->na
 Route::delete('/profile/personal',[ProfileController::class,'destroy'])->name('profile.delete');;
 Route::match(['get', 'post'], '/profile/follow/{id}',[ProfileController::class, 'follow'])->name('profile.follow');
 Route::match(['get', 'post'], '/profile/unfollow/{id}',[ProfileController::class, 'unfollow'])->name('profile.unfollow');
+Route::get('/get-followers-list/{userId}', [ProfileController::class, 'getFollowersList'])->name('followers_list');
+Route::get('/get-following-list/{userId}', [ProfileController::class, 'getFollowingList'])->name('following_list');
 Route::resource('post', PostController::class);
 //コメント関連
 Route::post('/post/{comment_id}/comments',[CommentsController::class,'store'])->name('comment.create');
