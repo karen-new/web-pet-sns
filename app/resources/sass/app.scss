@@ -69,7 +69,7 @@ a {
     text-decoration: none;
   }
 
-  .header {
+.header {
     position: fixed; /* ヘッダーを固定位置にする */
     background-color: #658e7c;
     display: flex;
@@ -79,4 +79,8 @@ a {
     top: 0; /* 上部に固定 */
     width: 100%; /* 画面幅に合わせる */
     z-index: 1000; /* 他の要素の上に表示するための z-index 設定 */
+}
+
+.body {
+    padding-top: 80px; /* ヘッダーの高さに合わせる */
 }
