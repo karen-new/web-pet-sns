@@ -7,6 +7,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,6 @@ Route::match(['get', 'post'], '/profile/unfollow/{id}',[ProfileController::class
 Route::get('/get-followers-list/{userId}', [ProfileController::class, 'getFollowersList'])->name('followers_list');
 Route::get('/get-following-list/{userId}', [ProfileController::class, 'getFollowingList'])->name('following_list');
 Route::resource('post', PostController::class);
+//コメント関連
+Route::post('/post/{comment_id}/comments',[CommentsController::class,'store'])->name('comment.create');
+Route::get('/comments/{comment_id}', [CommentsController::class,'destroy'])->name('comment.delete');

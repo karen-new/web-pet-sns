@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PetsnsItem extends Model
 {
@@ -19,6 +20,12 @@ class PetsnsItem extends Model
 
     public function like_users()
     {
-            return $this->belongsToMany(User::class,'likes','post_id','user_id')->withTimestamps();
+        return $this->belongsToMany(User::class,'likes','post_id','user_id')->withTimestamps();
+    }
+
+    //コメントとのリレーション作成
+    public function comments(): HasMany
+    {
+        return $this->hasMany('App\Models\Comment', 'post_id');
     }
 }
