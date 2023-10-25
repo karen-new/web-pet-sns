@@ -13,8 +13,8 @@
             <img src="{{ Storage::url($post->path) }}" width="800" height="400">
             {{ $post->comment }}
         </div>
-        <div>
-            <div class="text-left">
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div>
                 @if (Auth::user()->is_like($post->id))
                     <form action="{{ route('likes.unlike', $post->id) }}" method="POST">
                         @csrf
@@ -32,6 +32,23 @@
                     </form>
                 @endif
             </div>
+            @if($post->user_id == Auth::user()->id)
+                <div class="d-flex">
+                    {{-- 編集ボタン --}}
+                    <a href="{{ route('post.edit', $post->id) }}" class="btn btn-orange me-2">
+                        <i class="fa-solid fa-pen pe-2"></i>
+                        編集
+                    </a>
+                    {{-- 削除ボタン --}}
+                    <form action="{{ route('post.destroy', $post->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-blue">削除</button>
+                    </form>
+                </div>
+            @endif
+        </div>
+        <div class="card-body line-height">
             <div class="card-body line-height">
                 <div>
                     @if (!empty($post->comments))
@@ -68,23 +85,6 @@
                     </form>
                 </div>
             </div>
-            @if($post->user_id == Auth::user()->user_id)
-                <div class="d-flex justify-content-end">
-                
-                    {{-- 編集ボタン --}}
-                    <a href="{{ route('post.edit', $post->id) }}" class="btn btn-orange mt-3">
-                        <i class="fa-solid fa-pen pe-2"></i>
-                        編集
-                    </a>
-                    
-                    {{-- 削除ボタン --}}
-                    <form action="{{ route('post.destroy', $post->id) }}" method="POST" class="mt-3">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-blue px-4">削除</button>
-                    </form>
-                </div>
-            @endif
         </div>
     </div>
 </div>
