@@ -16,7 +16,7 @@
                         <input type="file" name="picture">
                         <textarea name="comment" class="form-control form-control-lg" placeholder="例）かわいい猫ちゃん"></textarea>
                     </div>
-
+                    @include('layouts.animal_dropdown')
                     <div class="text-center">
                         <button type="submit" class="btn btn-green px-4">投稿する</button>
                     </div>

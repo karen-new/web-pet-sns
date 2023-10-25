@@ -5,16 +5,17 @@
     <form class="text-center mb-5" action="{{ route('search') }}" method="GET">
         @csrf
         <i class="fa fa-search" aria-hidden="true"></i>
-        <input type="text" name="keyword" value="{{ $keyword }}">
+        <input type="text" name="keyword" value="{{ $keyword }}" placeholder="キーワードで検索">
+        @include('layouts.animal_dropdown')
+        <input type="text" name="tag" value="{{ $tag }}" placeholder="タグで検索">
         <input type="submit" value="検索">
     </form>
 
     @forelse ($posts as $post)
-    <tr>
-        @include('layouts.post',['post' => $post, 'post_user' => $post->user, 'user' => $user])
-    </tr>
+    <div>
+        @include('layouts.post', ['post' => $post, 'post_user' => $post->user, 'user' => $user])
+    </div>
     @empty
-        <td>{{ $keyword }} に一致する結果はありません</td>
+        <p class="text-center">一致する結果はありません</p>
     @endforelse
-
 @endsection

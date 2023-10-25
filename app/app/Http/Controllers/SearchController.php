@@ -21,18 +21,34 @@ class SearchController extends Controller
     {
         $user = Auth::user();
         $keyword = $request->input('keyword');
+        $tag = $request->input('tag');
         $posts = PetsnsItem::query();
 
-        if(!empty($keyword)) {
-            $posts->where('comment', 'LIKE', "%{$keyword}%")
-            ->orwhereHas('user', function ($query) use ($keyword) {
-                $query->where('name', 'LIKE', "%{$keyword}%");
+        if (!empty($keyword)) {
+            $posts->where(function ($query) use ($keyword) {
+                $query->where('comment', 'LIKE', "%{$keyword}%")
+                      ->orWhereHas('user', function ($subquery) use ($keyword) {
+                          $subquery->where('name', 'LIKE', "%{$keyword}%");
+                      });
             });
+        }
+
+        if (!empty($tag)) {
+            $posts->where('tag', 'LIKE', "%{$tag}%");
+        }
+
+        if ($request->has('type') && $request->input('type') !== null) {
+            $animalType = $request->input('type');
+            $posts->where('animal_type', $animalType);
+            if ($request->has('breed') && $request->input('breed') !== null) {
+                $animalBreed = $request->input('breed');
+                $posts->where('animal_breed', $animalBreed);
+            }
         }
 
         $posts = $posts->get();
 
-        return view('search.index', compact('posts', 'keyword'), ['user' => $user]);
+        return view('search.index', compact('posts', 'keyword', 'tag'), ['user' => $user]);
     }
 
     public function show()

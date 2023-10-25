@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class PetsnsItem extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','path','comment'];
+    protected $fillable = ['user_id','path','comment','tag','animal_type','animal_breed'];
 
      /**
      * Relationships

@@ -29,9 +29,7 @@ class PostController extends Controller
         $posts = PetsnsItem::whereIn('user_id', $follows)->orderBy('created_at', 'desc')->get();
 
         return view('post.index', compact('posts'), ['user' => $user]);
-
     }
-
 
     /**
      * 投稿新規作成画面
@@ -55,13 +53,19 @@ class PostController extends Controller
         $img = $request->file('picture');
         $path = $img->store('img','public');
 
+        // カンマで区切られたタグを配列に分割
+        $tags = explode(',', $request->tags);
+
         PetsnsItem::create(
             [
                 'user_id' => Auth::id(),
                 'path' => $path,
                 'comment' => $request->comment,
+                'animal_type' => $request->type,
+                'animal_breed' => $request->breed,
             ]
         );
+
         return redirect()->route('post.index');
     }
 
