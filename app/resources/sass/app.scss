@@ -69,7 +69,7 @@ a {
     text-decoration: none;
   }
 
-.header {
+.my-header {
     position: fixed; /* ヘッダーを固定位置にする */
     background-color: #658e7c;
     display: flex;
@@ -83,4 +83,37 @@ a {
 
 .body {
     padding-top: 80px; /* ヘッダーの高さに合わせる */
+}
+
+.my-card {
+    border: 1px solid #ccc; /* ボーダーを追加 */
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+.my-card-header {
+    /* カスタムスタイルを定義 */
+    background-color: #ceebdf;
+    color: #333;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+// .my-card-body {
+//     border: 1px solid #ccc; /* ボーダーを追加 */
+//     border-top: none;
+//     border-bottom: none;
+// }
+
+.my-card-footer {
+    background-color: #ceebdf;
+    color: #333;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }

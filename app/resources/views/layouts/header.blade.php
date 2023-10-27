@@ -1,4 +1,4 @@
-<header class="header">
+<header class="my-header">
     <div>
         <a href="{{ route('post.index') }}" style="color: white; font-size: 36px; font-weight: bold; margin-left: 20px;">
         PetSNS
