@@ -4,12 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="login">
-                <div class="mb-5">
-                <div class="login-header">{{ __('PetSNS') }}</div>
-                </div>
+            <div class="card border-2">
+                <div class="card-header">{{ __('PetSNS') }}</div>
 
-                <div class="login-body">
+                <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -54,8 +52,8 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-8 offset-md-4 text-center">
+                                <button type="submit" class="btn btn-custom-green">
                                     {{ __('Login') }}
                                 </button>
 
@@ -69,7 +67,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center mt-3">
                 {{ __('アカウントをお持ちでないですか？') }}
                 <a class="btn btn-link" href="{{ route('register') }}">
                     {{__('新規登録')}}

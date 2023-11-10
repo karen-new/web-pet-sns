@@ -19,9 +19,7 @@
 </head>
 <body class="body">
     <div id="app">
-        @auth
-            @include('layouts.header')
-        @endauth
+        @include('layouts.header')
 
         <main class="py-4">
             @yield('content')
