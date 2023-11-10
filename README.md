@@ -11,3 +11,13 @@
 
 ## 目指した課題解決
 ペットを飼っている人はペット自慢がしたいというニーズ、またかわいい、面白い動物の動画が見たいというユーザーのニーズそれぞれを満たせるよう目指しました。
+
+## URL
+ec2-18-181-162-220.ap-northeast-1.compute.amazonaws.com:8081
+
+## 技術選定
+Laravel
+HTML/CSS/Bootstrap
+PostgreSQL
+Docker
+AWS
