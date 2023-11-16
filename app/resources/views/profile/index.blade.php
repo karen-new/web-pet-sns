@@ -6,8 +6,8 @@
         <h2 class="my-5 text-center header-green">profile</h2>
 
         <div class="row">
-            <div class="col-md-2 mx-auto profile_picture">
-                <img src="{{ Storage::url($user->picture) }}" class="img-fluid">
+            <div class="col-md-2 mx-auto profile_image">
+                <img src="{{ $user->image }}" class="img-fluid rounded-image">
             </div>
             <div class="col-md-2 fw-bold fs-4 d-flex align-items-center">{{ $user->name }}</div>
             <div class="col-md-6 d-flex align-items-center">{{ $user->introduction }}</div>

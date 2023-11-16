@@ -2,7 +2,7 @@
     <div class="my-card">
         <div class="my-card-header d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <img src="{{ Storage::url($post_user->picture) }}" height="50" class="mx-2" style="object-fit: cover;">
+                <img src="{{ $post_user->image }}" class="mx-2 rounded-image-mini" style="object-fit: cover;">
                 <a href="{{ route('profile.index', $post->user_id) }}" class="fw-bold" style="flex-shrink-0;">
                     {{ $post_user->name }}
                 </a>
@@ -13,7 +13,7 @@
         </div>
         <div class="my-card-body">
                 <div class="text-center mt-3">
-                    <img src="{{ Storage::url($post->path) }}" width="80%" height="auto" class="mx-auto d-block">
+                    <img src="{{ $post->path }}" width="80%" height="auto" class="mx-auto d-block">
                 </div>
                 <div class="mt-3">
                     {{ $post->comment }}

@@ -56,7 +56,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
     font-weight: bold;
 }
 
-.profile_picture {
+.profile_image {
     width:  100px;
     height: 100px;
     object-fit:cover;
@@ -115,4 +115,18 @@ a {
 .btn-custom-green {
     background-color: #658e7c;
     color: white;
+}
+
+.rounded-image {
+    width: 90px; 
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.rounded-image-mini {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
 }

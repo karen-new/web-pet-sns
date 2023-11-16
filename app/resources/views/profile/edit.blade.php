@@ -8,14 +8,16 @@
             </div>
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="id" value="{{ $user->id }}">
                 <div class="m-3">
-                    <div>
-                        <img src="{{ \Storage::url($user->picture) }}" width="25%">
+                    <div class="row">
+                        <div style="display: flex; align-items: center;">
+                            <img src="{{ $user->image }}" class="img-fluid" width=50 style="margin-right: 10px;">
+                            <input type="file" name="image">
+                        </div>
                     </div>
-                    <div>
-                        <input type="file" name="image">
-                    </div>
+
                     <div class="form-group pt-1">
                         <label for="name">ユーザー名</label>
                         <input type="text" name="name" id="name" value="{{ $user->name }}" class="form-control">

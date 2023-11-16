@@ -43,7 +43,7 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'picture' => 'max:1024|mimes:jpeg,gif,png,jpg',
+            'image' => 'file|mimes:jpeg,gif,png,jpg',
             'name' => 'required|max:20',
             'introduction' => 'max:100',
         ]);
@@ -51,11 +51,11 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->introduction = $request->introduction;
 
-        $img = $request->file('image');
-        // InterventionImage::make($img)->resize(1080, 700);
-        if ($img != null) {
-            $path = $img->store('user','public');
-            $user->picture = $path;
+        $image = $request->file('image');
+        if ($image != null) {
+             // バケットへアップロードする
+            $path = Storage::disk('s3')->putFile('/', $image, 'public');
+            $user->image = Storage::disk('s3')->url($path);
         }
 
         $user->save();

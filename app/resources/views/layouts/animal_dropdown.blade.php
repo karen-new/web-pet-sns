@@ -42,6 +42,8 @@
         breedDropdown.add(new Option('犬種を選択', ''));
         breedDropdown.add(new Option('ゴールデン・レトリバー', 'golden_retriever'));
         breedDropdown.add(new Option('ラブラドール・レトリバー', 'labrador_retriever'));
+        breedDropdown.add(new Option('プードル', 'poodle'));
+        breedDropdown.add(new Option('柴犬', 'shibainu'));
         breedDropdown.add(new Option('ポメラニアン', 'pomeranian'));
         breedDropdown.add(new Option('ダックスフンド', 'dachshund'));
         breedDropdown.add(new Option('ビーグル', 'beagle'));
@@ -61,6 +63,7 @@
     function generateCatBreeds() {
         breedDropdown.add(new Option('猫種を選択', ''));
         breedDropdown.add(new Option('シャム猫', 'siamese_cat'));
+        breedDropdown.add(new Option('アメリカンショートヘア', 'american_shorthair_cat'));
         breedDropdown.add(new Option('ペルシャ猫', 'persian_cat'));
         breedDropdown.add(new Option('スコティッシュフォールド', 'scottish_fold'));
         breedDropdown.add(new Option('マンチカン', 'munchkin'));

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Log;
 
 
 class PostController extends Controller
@@ -46,20 +47,20 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'picture' => 'required|max:10240|mimes:jpeg,gif,png,jpg',
+            //'picture' => 'required|file|mimes:jpeg,gif,png,jpg',
             'comment' => 'required|max:200',
         ]);
 
-        $img = $request->file('picture');
-        $path = $img->store('img','public');
+        $image = $request->file('picture');
 
-        // カンマで区切られたタグを配列に分割
-        $tags = explode(',', $request->tags);
+        // バケットへアップロードする
+        $path = Storage::disk('s3')->putFile('/', $image, 'public');
+        $user = Auth::user();
 
         PetsnsItem::create(
             [
                 'user_id' => Auth::id(),
-                'path' => $path,
+                'path' => Storage::disk('s3')->url($path),
                 'comment' => $request->comment,
                 'animal_type' => $request->type,
                 'animal_breed' => $request->breed,
